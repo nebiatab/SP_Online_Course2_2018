@@ -53,8 +53,8 @@ class Decider(object):
 
         # TODO: Implement the properties of this method described above.
 
-        upper_margin = target_height + (target_height*self.margin)
-        lower_margin = target_height - (target_height*self.margin)
+        upper_margin = self.target_height + (self.target_height*self.margin)
+        lower_margin = self.target_height - (self.target_height*self.margin)
         
         if current_action == 'PUMP_OFF' and current_height < lower_margin:
             return actions['PUMP_IN']
@@ -62,15 +62,15 @@ class Decider(object):
         if current_action == 'PUMP_OFF' and current_height > upper_margin:
             return actions['PUMP_OUT']
 
-        if current_action == 'PUMP_OFF' and lower_margin =< current_height => upper_margin:
+        if current_action == 'PUMP_OFF' and (lower_margin <= current_height or current_height >= upper_margin):
             return actions['PUMP_OFF']
 
-        if current_action == 'PUMP_IN' and current_height > target_height:
+        if current_action == 'PUMP_IN' and current_height > self.target_height:
             return actions['PUMP_OFF']
         else:
             return actions['PUMP_IN']
 
-        if current_action == 'PUMP_OUT' and current_height < target_height:
+        if current_action == 'PUMP_OUT' and current_height < self.target_height:
             return actions['PUMP_OFF']
         else:
             return actions['PUMP_OUT']

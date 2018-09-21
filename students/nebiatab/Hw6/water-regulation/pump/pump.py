@@ -26,6 +26,7 @@ class Pump(object):
         self.address = address
         self.port = port
 
+
     def set_state(self, state):
         """
         Set the state of the remote pump.
@@ -51,3 +52,4 @@ class Pump(object):
         """
         response = urllib.request.urlopen(self.address + ":" + self.port)
         return int(response.read)
+
